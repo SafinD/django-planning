@@ -1,0 +1,13 @@
+
+    <p>{{ message }}</p>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" >Se connecter</button>
+        <a href="{% url 'logout' %}">Se déconnecter</a></p>
+    </form>
+<!--
+{% for adherent in adherents %}
+    <h1>{{ adherent.Prenom }}</h1>
+{%  endfor %}
+-->
