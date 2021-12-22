@@ -1,18 +1,42 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
-from .models import Adherent
-admin.site.register(Adherent)
+admin.site.site_header = 'Lyon Palme Entrainement'
 
-from .models import Entraineur
-admin.site.register(Entraineur)
 
-from .models import Coach
-admin.site.register(Coach)
+class AdherentAdmin(admin.ModelAdmin):
+    # ...
+    editable_list = ['Prenom']
 
-from .models import Role
+
+class EntrainementAdmin(admin.ModelAdmin):
+    list_display = ("Dates", "coach")
+
+
+@admin.register(Entraineur)
+class EntraineurAdmin(admin.ModelAdmin):
+    search_fields = ("Prenom__startswith", "Nom__startswith")
+
+
+@admin.register(Coach)
+class CoachAdmin(admin.ModelAdmin):
+    search_fields = ("Prenom__startswith", "Nom__startswith")
+
+
+@admin.register(Adherent)
+class AdherentAdmin(admin.ModelAdmin):
+    search_fields = ("Prenom__startswith", "Nom__startswith")
+
+
+@admin.register(Entrainement)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ("Dates", "coach")
+    list_filter = ("Dates",)
+
+
 admin.site.register(Role)
 
-from .models import Entrainement
-admin.site.register(Entrainement)
 
+class ProjectAdmin(admin.ModelAdmin):
+    # ...
+    search_fields = ('name',)

@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 
@@ -23,7 +25,7 @@ class Adherent(models.Model):
     Date_inscription = models.DateTimeField()
 
     def __str__(self):
-        return self.Prenom
+        return self.Nom + self.Prenom
 
 
 # Models Entraineur  hérite de Adhérent, un entraineur est forcément un adhérent
@@ -34,7 +36,7 @@ class Entraineur(models.Model):
     )
 
     def __str__(self):
-        return self.adherent.Prenom
+        return self.adherent.Nom + self.adherent.Prenom
 
 
 # Models Coach  hérite de Entraineur, un coach est forcément un entraineur
@@ -45,7 +47,7 @@ class Coach(models.Model):
     )
 
     def __str__(self):
-        return self.entraineur.adherent.Prenom
+        return self.entraineur.adherent.Nom + self.entraineur.adherent.Prenom
 
 
 # Models Entrainement regroupe les information nécessaire pour un entrainement
@@ -56,8 +58,9 @@ class Entrainement(models.Model):
     entraineurs = models.ManyToManyField(Entraineur)
     coach = models.ForeignKey(Coach, related_name="coachs_entrainement", on_delete=models.CASCADE)
 
+    # Models Role, contient les différent role occupé par des adhérent dans l'association, différent des groupes
 
-# Models Role, contient les différent role occupé par des adhérent dans l'association, différent des groupes
+
 class Role(models.Model):
     Nom = models.CharField(max_length=50)
     adherents = models.ManyToManyField(Adherent)

@@ -1,13 +1,14 @@
-
-    <p>{{ message }}</p>
-    <form method="post">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+<section class="section">
+<div class="columns is-mobile is-centered">
+  <div class="column is-half">
+      <div class = "card">
+          <form method="post">
         {{ form.as_p }}
         {% csrf_token %}
-        <button type="submit" >Se connecter</button>
-        <a href="{% url 'logout' %}">Se déconnecter</a></p>
-    </form>
-<!--
-{% for adherent in adherents %}
-    <h1>{{ adherent.Prenom }}</h1>
-{%  endfor %}
--->
+        <button class="button is-primary" type="submit" >Se connecter</button>
+        </form>
+      </div>
+  </div>
+</div>
+</section>
